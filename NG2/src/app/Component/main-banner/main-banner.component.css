@@ -1,0 +1,5 @@
+.main-banner-wrapper{
+    width: 100%;
+    object-fit: fill;
+    aspect-ratio: 3.3/1;
+}

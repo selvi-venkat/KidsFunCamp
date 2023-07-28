@@ -1,0 +1,115 @@
+<div class="d-flex justify-content-center gap-5 align-items-center">
+<form
+  #userLogin="ngForm"
+  (ngSubmit)="submitLogin(userLogin.value)"
+  class="login-form-wrapper"
+>
+  <div class="login-wrapper">
+    <div class="form-group row my-3">
+      <label for="staticEmail" class="col-form-label"
+        >Email Address</label
+      >
+      <div class="">
+        <input
+          type="text"
+          class="form-control"
+          id="staticEmail"
+          name="login-user"
+          placeholder="Enter username"
+          ngModel
+          #username="ngModel"
+          required
+          email
+        />
+        <div
+          class="text-danger d-flex"
+          [hidden]="username.valid || username.pristine"
+        >
+          <span *ngIf="username.errors?.['required'] && username.touched"
+            >Username is mandatory</span
+          >
+          <span *ngIf="username.touched && username.errors?.['email']"
+            >Username is invalid</span
+          >
+        </div>
+      </div>
+    </div>
+    <div class="form-group row my-3">
+      <label for="inputPassword" class="col-form-label">Password</label>
+      <div class="">
+        <input
+          type="password"
+          class="form-control"
+          id="inputPassword"
+          name="password-user"
+          placeholder="Enter password"
+          ngModel
+          #userPassword="ngModel"
+          required
+          minLength="8"
+          maxLength="16"
+        />
+        <div
+          class="text-danger d-flex"
+          [hidden]="userPassword.valid || userPassword.pristine"
+        >
+          <span
+            *ngIf="userPassword.errors?.['required'] && userPassword.touched"
+            >Password is mandatory</span
+          >
+          <span *ngIf="userPassword.touched && userPassword.errors?.['email']"
+            >Password is invalid</span
+          >
+        </div>
+      </div>
+    </div>
+    <div class="form-check my-3">
+      <input type="checkbox" class="form-check-input" id="exampleCheck1" />
+      <label class="form-check-label" for="exampleCheck1">Remember me</label>
+    </div>
+    <div class="my-3">
+      Not yet Registered? <a routerLink="/account/signIn">Click here</a>
+    </div>
+    <div class="d-flex justify-content-center my-3">
+      <button
+        type="submit"
+        class="btn btn-danger w-50"
+        [disabled]="userLogin.invalid"
+      >
+        Login
+      </button>
+    </div>
+  </div>
+
+  <!-- <div class="d-flex justify-content-center my-3 google-signin">
+    <div
+      id="g_id_onload"
+      data-client_id="282205706408-hiurg5qcr4u6tn790ifv9elk8kgdcts0.apps.googleusercontent.com"
+      data-context="signin"
+      data-ux_mode="popup"
+      data-login_uri="http://localhost:3000/api/login"
+      data-itp_support="true"
+    ></div>
+    <div
+      class="g_id_signin"
+      data-type="standard"
+      data-shape="pill"
+      data-theme="outline"
+      data-text="signin_with"
+      data-size="large"
+      data-logo_alignment="left"
+    ></div>
+  </div> -->
+  <router-outlet></router-outlet>
+</form>
+<div class="d-flex  align-items-center my-3">
+  <span>(OR)</span>
+</div>
+<div class="d-flex  align-items-center my-3">
+  <asl-google-signin-button
+    shape="square"
+    type="standard"
+    size="large"
+  ></asl-google-signin-button>  
+</div>
+</div>

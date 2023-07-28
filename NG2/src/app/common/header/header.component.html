@@ -1,0 +1,69 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-danger header-wrapper">
+  <div class="container">
+    <a class="navbar-brand me-0 logo-nav" routerLink="">KidzFunCamp</a>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-toggle="collapse"
+      data-target="#navbarNavAltMarkup"
+      aria-controls="navbarNavAltMarkup"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav mx-auto">
+        <a
+          class="nav-item nav-link text-white"
+          routerLink="home"
+          routerLinkActive="active"
+          >Home
+        </a>
+        <a
+          class="nav-item nav-link text-white"
+          routerLink="/about"
+          routerLinkActive="active"
+          >About</a
+        >
+        <a
+          class="nav-item nav-link text-white"
+          routerLink="/camps"
+          routerLinkActive="active"
+          >Camps</a
+        >
+        <a
+          class="nav-item nav-link text-white"
+          routerLink="/reviews"
+          routerLinkActive="active"
+          >Reviews</a
+        >
+      </div>
+    </div>
+    <div
+      class="nav-icons d-flex justify-content-between align-items-center gap-4"
+    >
+      <a routerLink="account" routerLinkActive="active"
+        ><i class="bi bi-person-square"></i
+      ></a>
+      <a routerLink="cart" routerLinkActive="active"
+        ><i class="bi bi-bag"></i
+      ></a>
+      <a routerLink="wishlist" routerLinkActive="active"
+        ><i class="bi bi-heart"></i
+      ></a>
+      <div class="user-info position-relative">
+        <span
+          *ngIf="userName"
+          class="text-white fw-bold login-user-info pe-auto"
+          >Welcome {{ userName }}</span
+        >
+        <span
+          (click)="logoutUser()"
+          class="sign-out-user cursor-pointer d-none text-danger bg-white p-3 w-100 position-absolute"
+          >Logout</span
+        >
+      </div>
+    </div>
+  </div>
+</nav>

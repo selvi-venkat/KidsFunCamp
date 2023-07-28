@@ -1,0 +1,226 @@
+<div class="container my-5">
+  <h4 class="text-center py-3 text-danger">REGISTERATION FORM</h4>
+  <form class="signup-wrapper" [formGroup]="signupForm">
+    <div class="form-row row mt-4">
+      <div class="form-group col-md-3">
+        <label for="inputUserName">UserName</label>
+        <input
+          type="text"
+          class="form-control mt-2"
+          id="inputUserName"
+          placeholder="UserName"
+          formControlName="userName"
+        />
+        <div class="error-code text-danger">
+          <span
+            *ngIf="getUserName?.errors?.['required'] && getUserName?.touched"
+          >
+            Username is mandatory
+          </span>
+          <span
+            *ngIf="getUserName?.errors?.['minlength'] && getUserName?.touched"
+          >
+            Username's minimum length should be 8 characters
+          </span>
+          <span
+            *ngIf="getUserName?.errors?.['maxlength'] && getUserName?.touched"
+          >
+            Username's maximum length should not be more than 15 characters
+          </span>
+        </div>
+      </div>
+      <div class="form-group col-md-3">
+        <label for="inputEmail">Email</label>
+        <input
+          type="email"
+          class="form-control mt-2"
+          id="inputEmail"
+          placeholder="Email"
+          formControlName="email"
+        />
+        <div class="error-code text-danger">
+          <span *ngIf="getEmail?.errors?.['required'] && getEmail?.touched">
+            EmailD is mandatory
+          </span>
+          <span *ngIf="getEmail?.errors?.['email'] && getEmail?.touched">
+            EmailD is not valid
+          </span>
+        </div>
+      </div>
+      <div class="form-group col-md-3">
+        <label for="inputPassword">Password</label>
+        <input
+          type="password"
+          class="form-control mt-2"
+          id="inputPassword"
+          placeholder="Password"
+          formControlName="password"
+        />
+      </div>
+      <div class="form-group col-md-3">
+        <label for="inputCPassword">Confirm Password</label>
+        <input
+          type="password"
+          class="form-control mt-2"
+          id="inputCPassword"
+          placeholder="Password"
+          formControlName="confirmPassword"
+        />
+      </div>
+    </div>
+    <div class="form-row mt-4" formArrayName="address">
+      <div #addressControls>
+        <div
+          *ngFor="let addr of addressList.controls; let i = index"
+          [formGroupName]="i"
+          class="row"
+        >
+          <div class="form-group col-md-3">
+            <label for="inputAddress">Address {{ i + 1 }}</label>
+            <input
+              type="text"
+              class="form-control mt-2"
+              id="inputAddress"
+              formControlName="street"
+            />
+            <span *ngIf="addr.get('street')?.invalid && addr.get('street')?.touched">Street Name is mandatory</span>
+          </div>
+          <div class="form-group col-md-3">
+            <label for="inputCity">City</label>
+            <input
+              type="text"
+              class="form-control mt-2"
+              id="inputCity"
+              formControlName="city"
+            />
+          </div>
+          <div class="form-group col-md-3">
+            <label for="inputState">State</label>
+            <select
+              id="inputState"
+              class="form-control mt-2"
+              formControlName="state"
+            >
+              <option selected>Choose...</option>
+              <option>...</option>
+            </select>
+          </div>
+          <div class="form-group col-md-2">
+            <label for="inputZip">Zipcode</label>
+            <input
+              type="text"
+              class="form-control mt-2"
+              id="inputZip"
+              formControlName="zipcode"
+            />
+          </div>
+          <div
+            class="col-md-1 d-flex gap-2 justify-content-end align-items-end"
+          >
+            <i
+              class="bi bi-plus-circle add-address text-secondary address-icon"
+              data-toggle="tooltip"
+              data-placement="bottom"
+              title="Add Address"
+              (click)="addAddressExtension()"
+            ></i>
+            <i
+              class="bi bi-trash remove-address text-secondary address-icon"
+              data-toggle="tooltip"
+              data-placement="bottom"
+              title="Remove Address"
+              (click)="removeAddressExtension(i)"
+            ></i>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <span #addressDelete class="text-danger"></span>
+      </div>
+    </div>
+    <div class="form-row row mt-4">
+      <div class="form-group col-md-6">
+        <label for="inputHobby">Interest</label>
+        <div
+          class="form-check form-check-inline m-0"
+          *ngFor="let controlInterest of interestList.controls; let i = index"
+        >
+          <input
+            class="form-check-input mx-2"
+            [formControl]="$any(controlInterest)"
+            type="checkbox"
+            id="inlineCheckbox{{ i }}"
+            value="interests"
+            (change)="getSelectedInterests()"
+          />
+          <label class="form-check-label" for="inlineCheckbox{{ i }}">{{
+            interests[i]
+          }}</label>
+        </div>
+        <span *ngIf="interestList?.errors?.['required'] && interestList?.touched">
+            Atleast select one interest
+        </span> 
+      </div>
+      <div class="form-group col-md-6">
+        <label for="inputGender">Gender</label>
+        <ng-container *ngFor="let val of genders; let i = index">
+          <div class="form-check form-check-inline m-0">
+            <input
+              class="form-check-input mx-2"
+              type="radio"
+              id="inlineRadio{{ i }}"
+              value="{{ val }}"
+              formControlName="gender"
+            />
+            <label class="form-check-label" for="inlineRadio{i}">{{
+              val
+            }}</label>
+          </div>
+        </ng-container>
+      </div>
+    </div>
+    <div formArrayName="contactNumber" class="mt-4">
+      <label for="inputContactNumber">Contact Number</label>
+      <div
+        class="form-group row mt-2"
+        *ngFor="let controlContact of contacts.controls; let i = index"
+      >
+        <div class="form-group col-md-6">
+          <input
+            [formControl]="$any(controlContact)"
+            type="text"
+            class="form-control mt-2"
+            id="inputContactNumber"
+            placeholder="Contact Number"
+          />
+        </div>
+        <div class="col-md-1 d-flex gap-2 justify-content-end align-items-end">
+          <i
+            class="bi bi-plus-circle add-contact text-secondary contact-icon"
+            data-toggle="tooltip"
+            data-placement="bottom"
+            title="Add Contact Number"
+            (click)="addContacts()"
+          ></i>
+          <i
+            class="bi bi-trash remove-contact text-secondary contact-icon"
+            data-toggle="tooltip"
+            data-placement="bottom"
+            title="Remove Contact"
+            (click)="removeContacts(i)"
+          ></i>
+        </div>
+      </div>
+    </div>
+    <div class="d-flex justify-content-center mt-4">
+      <button
+        type="submit"
+        class="btn btn-danger py-3 px-4"
+        (click)="register()"
+        [disabled]="signupForm.invalid">   
+        Sign in
+      </button>
+    </div>
+  </form>
+</div>
