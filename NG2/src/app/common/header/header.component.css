@@ -14,7 +14,7 @@
 .header-wrapper .nav-icons a.active i {
   border: 2px solid white;
   border-radius: 10%;
-  padding: 4px;
+  padding: 6px;
 }
 .user-info:hover {
   cursor: pointer;
