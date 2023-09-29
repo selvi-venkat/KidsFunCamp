@@ -17,14 +17,11 @@ export class HeaderComponent implements OnInit{
   //userName: any ;
   ngOnInit(): void {
      this.userCredentialService.userInfoEmitter.subscribe((res)=>{
-            console.log(typeof(res));
-      
+      console.log(typeof(res));      
       this.userName=res?.firstName;
-      console.log(this.userName);
-      
+      console.log(this.userName);      
     });
-     console.log(this.userName);
-  
+     console.log(this.userName);  
   }
   logoutUser(){
     console.log('in log outside');

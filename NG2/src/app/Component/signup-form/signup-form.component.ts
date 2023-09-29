@@ -15,6 +15,8 @@ import {
 import { UserRegisterationService } from 'src/app/Service/user-registeration.service';
 import { userRegModel } from 'src/app/Model/userRegister.model';
 import { Router } from '@angular/router';
+import { outputAst } from '@angular/compiler';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-signup-form',
@@ -28,12 +30,12 @@ export class SignupFormComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private userRegService: UserRegisterationService,
-    private router: Router,
+    private router: Router
   ) {}
   ngAfterViewInit() {
     // this.deleteSpan.nativeElement.innerHTML('It is mandatory to have atleast one address');
   }
-  ngOnInit(){
+  ngOnInit() {
     this.userRegService.fetchUserDetails();
   }
   genders: Array<string> = ['male', 'female', 'others'];

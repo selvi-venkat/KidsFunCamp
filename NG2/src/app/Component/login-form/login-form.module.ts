@@ -5,6 +5,7 @@ import {
   SocialAuthServiceConfig,
   GoogleLoginProvider,
 } from '@abacritt/angularx-social-login';
+import { LoginFormComponent } from './login-form.component';
 
 @NgModule({
   declarations: [],
@@ -27,6 +28,6 @@ import {
         },
       } as SocialAuthServiceConfig,
     },
-  ],
+  ]
 })
 export class LoginFormModule {}

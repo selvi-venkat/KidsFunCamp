@@ -34,7 +34,8 @@ import { LoginFormModule } from './Component/login-form/login-form.module';
     AppRoutingModule,
     HttpClientModule,
     SocialLoginModule,
-    LoginFormModule
+    LoginFormModule,
+    HttpClientModule
   ],
   providers: [ UserCredentialService],
   bootstrap: [AppComponent],
